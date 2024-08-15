@@ -7,6 +7,8 @@ const Carousal = () => {
     return (
         <>
         <div className="container-fluid p-0">
+        
+
             <div className="row">
                 <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">

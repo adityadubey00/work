@@ -2,14 +2,34 @@ import React, { useState } from 'react';
 import '../login/css/login.css';
 import SignUp from './Singup';
 
-function Login() {
-  const [showSignUp, setShowSignUp] = useState(false);
+const Login = (props) => {
+  const setAuthUser=props.setAuthUser
+  const {
+      register,
+      handleSubmit,
+      formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    const userInfo = {
+        email: data.email,
+        password: data.password,
+    }
+    try {
+      const res = await axios.post();
+      if (res.data) {
+          toast.success('Login Successful!');
+          localStorage.setItem("Users", JSON.stringify(res.data.user));
+          setAuthUser(true);
+          document.getElementById("my_modal_3").close();
 
-  const handleSignUpClick = (e) => {
-    e.preventDefault(); 
-    setShowSignUp(true); 
-  };
-
+    
+      }
+  } catch (error) {
+      if (error.response) {
+          toast.error("Error: " + error.response.data.message);
+          setTimeout(()=>{},3000)
+      }
+  }}
   return (
     <>
       {showSignUp ? (
